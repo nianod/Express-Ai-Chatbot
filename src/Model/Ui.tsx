@@ -3,13 +3,10 @@ import { FaLocationArrow } from "react-icons/fa"
 
 const Ui = () => {
   const [input, setInputValue] = useState("")
+  const [messages, setMessages] = useState<{role: "user" | "bot":, text :String}[]><[]>
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (input.trim() === "")
-     return
-    alert(`You asked: ${input}`)
-    setInputValue("")
+  const handleSubmit = (e: React.FormEvent) => {
+    
 
   }
 
