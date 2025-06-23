@@ -15,7 +15,7 @@ app.post('/chat', (req, res) => {
 
 //Demo    
     res.json({
-      reply: `you said: "${message}". Im just a simple bot`    
+      reply: `   I'm just a simple bot`    
 })
 
 })
@@ -24,3 +24,4 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {console.log(`Server runnig on port: ${PORT}`)})
+ 

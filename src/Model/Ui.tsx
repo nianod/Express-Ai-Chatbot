@@ -5,17 +5,56 @@ const Ui = () => {
   const [input, setInputValue] = useState("")
   const [messages, setMessages] = useState<{role: "user" | "bot", text :String}[]>([])
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setInputValue("")
-    
-    if(input.trim() === "") return
-    setMessages(prev => [...prev, {role: "user", text: input},{role: "bot", text: "Thinking.."}])
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault()
 
+  if (input.trim() === "") return
+
+  const messageToSend = input
+  setInputValue("")
+
+   
+  setMessages((prev) => [
+    ...prev,
+    { role: "user", text: messageToSend },
+    { role: "bot", text: "Thinking..." }
+  ])
+
+  try {
+    //Send message to backend
+    const res = await fetch("http://localhost:3000/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message: messageToSend })
+    })
+
+    const data = await res.json()
+
+    
+    setMessages((prev) => {
+      const updated = [...prev]
+      updated[updated.length - 1] = { role: "bot", text: data.reply }
+      return updated
+    })
+  } catch (error) {
+    console.error("Error:", error)
+ 
+    setMessages((prev) => {
+      const updated = [...prev]
+      updated[updated.length - 1] = {
+        role: "bot",
+        text: "Something went wrong!"
+      }
+      return updated
+    })
   }
+}
+
 
   return (
-    <div className="border w-fit bg-pink-700 rounded-2xl m-auto mt-20 p-5">
+    <div className="border w-fit bg-pink-700 rounded-2xl m-auto mt-10 p-5">
       <div className="max-w-md">
         <h1 className="font-bold text-white text-2xl bg-green-700 w-full justify-center flex">
           Chat Bot
@@ -23,19 +62,19 @@ const Ui = () => {
         <div>
             {messages.map((message, index) => (
                 <div key={index}
-                className={`my-1 text-white text-xl ${message.role === "user" ? "text-right" :"text-left"}`}
+                className={`my-1  text-black text-xl ${message.role === "user" ? "p-2 rounded -xl bg-blue-500 text-right max-[20px]" :"p-2 rounded -x bg-white max-[20px] text-left"}`}
                 >
                     <span>{message.text}</span>
                 </div>
             ))}
         </div>
         <form
-          className="flex items-center border justify-between w-80 p-3 rounded-2xl mt-50 mb-2"
+          className="flex items-center bg-red-600 border justify-between w-80 p-3 rounded-2xl mt-70 mb-2"
           onSubmit={handleSubmit}
         >
           <input
             type="text"
-            className="focus:outline-none w-64 bg-transparent text-xl font-semibold text-white"
+            className="focus:outline-none w-64  text-xl font-semibold text-white"
             value={input}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Ask anything..."
