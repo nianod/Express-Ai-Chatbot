@@ -23,19 +23,19 @@ const Ui = () => {
         <div>
             {messages.map((message, index) => (
                 <div key={index}
-                className={`my-1 ${message.role === "user" ? "text-right" :"text-left"}`}
+                className={`my-1 text-white text-xl ${message.role === "user" ? "text-right" :"text-left"}`}
                 >
                     <span>{message.text}</span>
                 </div>
             ))}
         </div>
         <form
-          className="flex items-center border justify-between w-80 p-3 rounded-2xl mt-30 mb-2"
+          className="flex items-center border justify-between w-80 p-3 rounded-2xl mt-50 mb-2"
           onSubmit={handleSubmit}
         >
           <input
             type="text"
-            className="focus:outline-none w-64 bg-transparent text-white"
+            className="focus:outline-none w-64 bg-transparent text-xl font-semibold text-white"
             value={input}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Ask anything..."
