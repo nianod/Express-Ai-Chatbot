@@ -1,8 +1,13 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-
+require('dotevn').config()
+const { OpenAI } = require('openai')
 const PORT = 3000
+
+const openai = new OpenAI({
+    apikey: process.env.OPENAI_API_KEY
+})
 
 
 app.use(cors())
@@ -15,7 +20,11 @@ app.post('/chat', (req, res) => {
 
 //Demo    
     res.json({
-      reply: `   I'm just a simple bot`    
+      model: "gpt-4o-mini",
+      store: true,
+      messages: [
+        {"role": "user", "content" : "who are you?"}
+      ]    
 })
 
 })
