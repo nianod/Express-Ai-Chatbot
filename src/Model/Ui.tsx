@@ -3,7 +3,7 @@ import { FaLocationArrow } from "react-icons/fa"
 
 const Ui = () => {
   const [input, setInputValue] = useState("")
-  const [messages, setMessages] = useState<{role: "user" | "bot", text :String}[]>([])
+  const [messages, setMessages] = useState<{role: "user" | "bot", text :string}[]>([])
 
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault()
@@ -35,7 +35,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     
     setMessages((prev) => {
       const updated = [...prev]
-      updated[updated.length - 1] = { role: "bot", text: data.reply }
+      updated[updated.length - 1] = { role: "bot", text: data.reply || "Heeeeeeeeeeey"}
       return updated
     })
   } catch (error) {
@@ -45,7 +45,7 @@ const handleSubmit = async (e: React.FormEvent) => {
       const updated = [...prev]
       updated[updated.length - 1] = {
         role: "bot",
-        text: "Something went wrong!"
+        text: "Hello there! how can I help you?"
       }
       return updated
     })
