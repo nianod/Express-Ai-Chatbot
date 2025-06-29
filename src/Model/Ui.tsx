@@ -56,10 +56,11 @@ const handleSubmit = async (e: React.FormEvent) => {
   return (
     <div className="border w-fit bg-pink-700 rounded-2xl m-auto mt-10 p-5">
       <div className="max-w-md">
-        <h1 className="font-bold text-white text-2xl bg-green-700 w-full justify-center flex">
+        <h1 className="font-bold text-white text-2xl bg-green-700 w-full mb-5 justify-center flex">
           Chat Bot
         </h1>
-        <div>
+        <div className="h-69 overflow-y-auto flex flex-col-reverse">
+          <div>
             {messages.map((message, index) => (
                 <div key={index}
                 className={`my-1  text-black text-xl ${message.role === "user" ? "p-2 rounded -xl bg-blue-500 text-right max-[20px]" :"p-2 rounded -x bg-white max-[20px] text-left"}`}
@@ -67,9 +68,10 @@ const handleSubmit = async (e: React.FormEvent) => {
                     <span>{message.text}</span>
                 </div>
             ))}
+          </div>  
         </div>
         <form
-          className="flex items-center bg-red-600 border justify-between w-80 p-3 rounded-2xl mt-70 mb-2"
+          className="flex items-center bg-red-600 border justify-between w-80 p-3 rounded-2xl mt-5   mb-2"
           onSubmit={handleSubmit}
         >
           <input
