@@ -5,6 +5,8 @@ const Ui = () => {
   const [input, setInputValue] = useState("")
   const [messages, setMessages] = useState<{role: "user" | "bot", text :string}[]>([])
 
+  const BASE_URL: string= import.meta.env.VITE_BACKEND_URL
+
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault()
 
@@ -22,7 +24,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
   try {
     //Send message to backend
-    const res = await fetch("http://localhost:3000/chat", {
+    const res = await fetch(`${BASE_URL}/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

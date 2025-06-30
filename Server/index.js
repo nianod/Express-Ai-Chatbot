@@ -3,14 +3,16 @@ const app = express()
 const cors = require('cors')
 require('dotenv').config()
 const { OpenAI } = require('openai')
-const PORT = 3000
+
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 })
 
 
-app.use(cors())
+app.use(cors({
+    origin: "*", //Allow all origins
+}))
 app.use(express.json())
 
 // Routes
@@ -48,6 +50,6 @@ app.post('/chat', async (req, res) => {
 app.get('/', (req, res) => {
     res.send("Chatbot is Live")
 })
-
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {console.log(`Server runnig on port: ${PORT}`)})
  
