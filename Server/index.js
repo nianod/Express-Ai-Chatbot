@@ -14,18 +14,35 @@ app.use(cors())
 app.use(express.json())
 
 // Routes
-app.post('/chat', (req, res) => {
+app.post('/chat', async (req, res) => {
     const { message } = req.body
 
 
 //Demo    
-    res.json({
-      model: "gpt-4o-mini",
-      store: true,
-      messages: [
-        {"role": "user", "content" : "who are you?"}
-      ]    
-})
+    try {
+        const completion = await openai.chat.completions.create({
+            model: "gpt-4o-mini",
+            messages: [
+                {role :"user", content: message }
+            ]
+        })
+        const reply = completion.choices[0].message.content
+        res.json({ reply })
+    } catch (error) {
+        console.error("OpenAI error", error)
+        res.status(429).json({
+            reply: "Am overloaded at the moment. I've hit maximum quota"
+        })
+    }
+
+//     res.json({
+//         // reply: "replying to" + message
+//       model: "gpt-4o-mini",
+//       store: true,
+//       message: [
+//         {"role": "user", "content" : "who are you?"}
+//       ]    
+// })
 
 })
 app.get('/', (req, res) => {
