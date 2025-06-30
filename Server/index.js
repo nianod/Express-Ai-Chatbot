@@ -9,9 +9,11 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 })
 
-
+app.options('*', cors())
 app.use(cors({
-    origin: "*", //Allow all origins
+    origin: 'https://express-ai-chatbot.vercel.app/',
+    credentials: true
+ 
 }))
 app.use(express.json())
 

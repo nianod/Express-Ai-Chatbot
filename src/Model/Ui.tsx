@@ -24,6 +24,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
   try {
     //Send message to backend
+    // console.log("Your urls is", BASE_URL)
     const res = await fetch(`${BASE_URL}/chat`, {
       method: "POST",
       headers: {
