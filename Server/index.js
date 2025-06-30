@@ -9,12 +9,23 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 })
 
-app.options('*', cors())
+
+const allowedOrigins = [
+    'https://express-ai-chatbot.vercel.app',
+    'http://localhost:5173'
+]
 app.use(cors({
-    origin: 'https://express-ai-chatbot.vercel.app/',
+    origin: function(origin, callback) {
+        if(!origin || allowedOrigins.includes(origin)){
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
     credentials: true
  
 }))
+ app.options('*', cors())
 app.use(express.json())
 
 // Routes
