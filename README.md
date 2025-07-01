@@ -34,19 +34,15 @@ You can **clone this repo and run the project locally**:
 git clone https://github.com/nianod/Express-Ai-Chatbot
 cd Express-Ai-Chatbot
 
-
 # Fronted Setup
-
-# Create .env in /client
+# Create .env in the root of your client
 VITE_BACKEND_URL=https://express-ai-chatbot.onrender.com
 
 npm install    # Install frontend dependencies
 npm run dev    # Start frontend locally
 
 
-# Fronted Setup
-
-
+# Bakend Setup
 cd server  # Navigate to backend folder
 
 # Create .env file in /server
