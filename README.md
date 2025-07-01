@@ -29,24 +29,25 @@ If the chatbot doesn’t respond:
 
 You can **clone this repo and run the project locally**:
 
-```bash
-# Clone the repository
+```js
+// Clone the repository
 git clone https://github.com/nianod/Express-Ai-Chatbot
 cd Express-Ai-Chatbot
 
-# Fronted Setup
-# Create .env in the root of your client
-VITE_BACKEND_URL=https://express-ai-chatbot.onrender.com
 
-npm install    # Install frontend dependencies
-npm run dev    # Start frontend locally
+// Bakend Setup
+cd server  // Navigate to backend folder
 
-
-# Bakend Setup
-cd server  # Navigate to backend folder
-
-# Create .env file in /server
+// Create .env file in /server
 OPENAI_API_KEY=your-openai-api-key-here
 
-npm install   # Install backend dependencies
-node index.js # Start backend
+npm install   // Install backend dependencies
+node index.js // Start backend
+
+
+// Fronted Setup
+// Create .env in the root of your client
+VITE_BACKEND_URL=https://express-ai-chatbot.onrender.com
+
+npm install    // Install frontend dependencies
+npm run dev    // Start frontend locally
